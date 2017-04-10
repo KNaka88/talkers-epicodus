@@ -15,10 +15,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UserComponent implements OnInit {
   // preset location and icon
   public uid: string;
-  public lat: number = 45.5206223;
-  public lng: number = -122.6795871;
+  public lat: number = 45.5206726;
+  public lng: number = -122.67779689999999;
   public userFbObj: FirebaseObjectObservable<any>;
   public currentUser: User;
+  public timestamp: any;
 
   constructor(
     private userService: UserService,
@@ -35,24 +36,15 @@ export class UserComponent implements OnInit {
       this.uid = urlParameters['id'];
     });
 
-    this.userService.getUserById(this.uid).subscribe( (userFbObj) => {
-      this.currentUser = new User(
-        userFbObj.displayName,
-        userFbObj.email,
-        this.lat,
-        this.lng,
-        Date.now()
-      );
-      console.log(this.currentUser);
-    });
-
+    this.userFbObj = this.userService.getUserById(this.uid);
   }
 
-  setLatLng (lat: number, lng: number) {
-  this.lat = lat;
-  this.lng = lng;
-  }
 
+  setLatLng(lat: number, lng: number) {
+    this.lat = lat;
+    this.lng = lng;
+    this.userService.updateUserInfo(this.lat, this.lng, this.uid);
+  }
 
 
 }

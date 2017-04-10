@@ -50,4 +50,12 @@ export class UserService {
   getUserById(uid: string) {
     return this.af.database.object("registeredUsers/" + uid);
   }
+
+  updateUserInfo(lat, lng, uid){
+    this.af.database.object("registeredUsers/" + uid).update({
+      lat: lat,
+      lng: lng,
+      timestamp: Date.now()
+    });
+  }
 }

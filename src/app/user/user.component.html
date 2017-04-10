@@ -2,7 +2,8 @@
   <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
     <sebm-google-map-info-window [disableAutoPan]="true">
       <ul>
-        <li>Hello</li>
+        <li>{{ (userFbObj | async)?.displayName}}</li>
+        <li>{{ (userFbObj | async)?.timestamp  | date:"MM/dd/yy hh:mm a"}}</li>
       </ul>
     </sebm-google-map-info-window>
   </sebm-google-map-marker>
