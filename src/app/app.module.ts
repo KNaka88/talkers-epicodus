@@ -11,6 +11,9 @@ import { routing } from './app.routing';
 import { UserComponent } from './user/user.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { LoginComponent } from './login/login.component';
+import { UserService } from './user.service';
+
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -24,7 +27,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     UserComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ export const firebaseConfig = {
     routing,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

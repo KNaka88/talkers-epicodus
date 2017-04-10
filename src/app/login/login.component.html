@@ -1,0 +1,11 @@
+<p>
+  login works!
+</p>
+
+<form>
+  <label>Email address</label>
+  <input #newEmail type="email">
+  <label>Password</label>
+  <input type="password" #newPassword>
+  <button (click)="login(newEmail.value, newPassword.value)">Login</button>
+</form>

@@ -5,6 +5,6 @@ export class User {
 		public lat: number,
 		public lng: number,
 		public timestamp: string,
-		public messagesKey: []
+		public messagesKey: Array<any>
 	){}
 }
