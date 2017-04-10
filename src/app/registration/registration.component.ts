@@ -18,14 +18,15 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  registerUserButton(name, email, password){
+  registerUserButton(name, email, password, iconNumber){
     let lat: number = 45.5206223;
     let lng: number = -122.6795871;
     let timestamp: string = '';
     let messageKey: Array<any>;
+    let icon:string ="../assets/img/icon" + iconNumber + '.png';
 
     this.userService.registerUser(email, password).then( (user) => {
-      let newUser = new User (name, email, lat, lng, timestamp);
+      let newUser = new User (name, email, lat, lng, timestamp, icon);
       this.userService.saveUserInfoFromForm(user.uid, newUser).then(() => {
         this.router.navigate(['user/' + user.uid]);
       })

@@ -6,8 +6,10 @@ import { User } from './user.model';
 @Injectable()
 export class UserService {
   users:FirebaseListObservable<any[]>;
+  public displayName:any;
+  public email:any;
 
-  constructor(private af:AngularFire) {
+  constructor(public af:AngularFire) {
     this.users = af.database.list('registeredUsers');
    }
 
@@ -45,7 +47,8 @@ export class UserService {
       displayName: newUser.name,
       email: newUser.email,
       lat: newUser.lat,
-      lng: newUser.lng
+      lng: newUser.lng,
+      icon: newUser.icon
     });
   }
 
@@ -63,5 +66,13 @@ export class UserService {
 
   getAllUsers() {
     return this.users;
+  }
+
+  logout(){
+    return this.af.auth.logout();
+  }
+
+  getUserName(uid: string){
+     return this.af.database.object('registeredUsers/' + uid);
   }
 }

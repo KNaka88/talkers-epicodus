@@ -6,5 +6,12 @@
   <input #newEmail type="email" id="email">
   <label for="password">Password</label>
   <input #newPassword type="password" id='password'>
-  <button (click)="registerUserButton(newName.value, newEmail.value, newPassword.value)">Create Account</button>
+  <select #newIcon>
+  <option value="1">Umbrella</option>
+  <option value="2">Cat</option>
+  <option value="3">Grandfather</option>
+  <option value="4">Dog</option>
+  <option value="5">Couple</option>
+</select>
+  <button (click)="registerUserButton(newName.value, newEmail.value, newPassword.value, newIcon.value)">Create Account</button>
 </form>

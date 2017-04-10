@@ -22,6 +22,8 @@ export class UserComponent implements OnInit {
   public timestamp: any;
   users: FirebaseListObservable<any[]>;
 
+  public infoWindow: boolean = false;
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -39,7 +41,6 @@ export class UserComponent implements OnInit {
 
     this.userFbObj = this.userService.getUserById(this.uid);
     this.users = this.userService.getAllUsers();
-    console.log(typeof this.users);
   }
 
 
@@ -48,6 +49,15 @@ export class UserComponent implements OnInit {
     this.lng = lng;
     this.userService.updateUserInfo(this.lat, this.lng, this.uid);
   }
+
+  showInfoWindow(){
+    this.infoWindow = true;
+    console.log(this.infoWindow);
+  }
+
+  // hideInfoWindow(){
+  //   this.infoWindow = false;
+  // }
 
 
 
