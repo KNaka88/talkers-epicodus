@@ -5,9 +5,11 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  user: FirebaseObjectObservable<any>
+  users:FirebaseListObservable<any[]>;
 
-  constructor(private af:AngularFire) { }
+  constructor(private af:AngularFire) {
+    this.users = af.database.list('registeredUsers');
+   }
 
   login(email,password) {
     return this.af.auth.login(
@@ -57,5 +59,9 @@ export class UserService {
       lng: lng,
       timestamp: Date.now()
     });
+  }
+
+  getAllUsers() {
+    return this.users;
   }
 }

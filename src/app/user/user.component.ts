@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
   public userFbObj: FirebaseObjectObservable<any>;
   public currentUser: User;
   public timestamp: any;
+  users: FirebaseListObservable<any[]>;
 
   constructor(
     private userService: UserService,
@@ -37,6 +38,8 @@ export class UserComponent implements OnInit {
     });
 
     this.userFbObj = this.userService.getUserById(this.uid);
+    this.users = this.userService.getAllUsers();
+    console.log(typeof this.users);
   }
 
 
@@ -45,6 +48,7 @@ export class UserComponent implements OnInit {
     this.lng = lng;
     this.userService.updateUserInfo(this.lat, this.lng, this.uid);
   }
+
 
 
 }
