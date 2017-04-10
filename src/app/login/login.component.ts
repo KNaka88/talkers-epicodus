@@ -6,14 +6,16 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [UserService]
 })
 export class LoginComponent {
   public error:any;
 
 login(email,password) {
   this.userService.login(email, password).then((data)=> {
-    this.router.navigate(['user/1']);
+
+    this.router.navigate(['user/' + data.uid]);
   })
   .catch((error:any)=> {
     if (error) {
@@ -24,7 +26,7 @@ login(email,password) {
 
 loginGoogleButton() {
   return this.userService.loginGoogle().then((data) => {
-    this.router.navigate(['user/1']);
+    this.router.navigate(['user/' + data.uid]);
   })
 }
 

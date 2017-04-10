@@ -6,7 +6,8 @@ import { User } from '../user.model';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  providers: [UserService]
 })
 export class RegistrationComponent implements OnInit {
   public error: any;
@@ -24,7 +25,7 @@ export class RegistrationComponent implements OnInit {
     let messageKey: Array<any>;
 
     this.userService.registerUser(email, password).then( (user) => {
-      let newUser = new User (name, email, lat, lng, timestamp, messageKey);
+      let newUser = new User (name, email, lat, lng, timestamp);
       this.userService.saveUserInfoFromForm(user.uid, newUser).then(() => {
         this.router.navigate(['user/' + user.uid]);
       })

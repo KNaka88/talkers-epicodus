@@ -5,8 +5,7 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  // email:string;
-  // password:string;
+  user: FirebaseObjectObservable<any>
 
   constructor(private af:AngularFire) { }
 
@@ -46,5 +45,9 @@ export class UserService {
       lat: newUser.lat,
       lng: newUser.lng
     });
+  }
+
+  getUserById(uid: string) {
+    return this.af.database.object("registeredUsers/" + uid);
   }
 }
