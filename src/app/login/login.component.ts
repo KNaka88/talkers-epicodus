@@ -22,6 +22,12 @@ login(email,password) {
   });
 }
 
+loginGoogleButton() {
+  return this.userService.loginGoogle().then((data) => {
+    this.router.navigate(['user/1']);
+  })
+}
+
   constructor(private userService:UserService, private router:Router) { }
 
 }

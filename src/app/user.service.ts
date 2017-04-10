@@ -21,4 +21,13 @@ export class UserService {
       });
   }
 
+  loginGoogle(){
+    return this.af.auth.login(
+      {
+        provider: AuthProviders.Google,
+        method: AuthMethods.Popup
+      }
+    )
+  }
+
 }
