@@ -31,7 +31,7 @@ export class AppComponent {
               });
               this.userService.email = auth.auth.email;
               this.isLoggedIn = true;
-              this.router.navigate(['']);
+              this.router.navigate(['user/' + auth.uid]);
             }
           }
         }
