@@ -13,6 +13,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 export const firebaseConfig = {
@@ -28,7 +29,8 @@ export const firebaseConfig = {
     AppComponent,
     UserComponent,
     WelcomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

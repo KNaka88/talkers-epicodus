@@ -1,0 +1,10 @@
+
+<form>
+  <label for="name">Name</label>
+  <input #newName type="text" id="name">
+  <label for="email">Email</label>
+  <input #newEmail type="email" id="email">
+  <label for="password">Password</label>
+  <input #newPassword type="password" id='password'>
+  <button (click)="registerUserButton(newName.value, newEmail.value, newPassword.value)">Create Account</button>
+</form>
