@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -8,6 +8,9 @@ import { mapKey } from './api-keys';
 import { masterFirebaseConfig } from './api-keys';
 import { AngularFireModule } from 'angularfire2';
 import { routing } from './app.routing';
+import { UserComponent } from './user/user.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -19,7 +22,9 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
