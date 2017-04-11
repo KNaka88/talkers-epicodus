@@ -19,8 +19,10 @@ export class UserComponent implements OnInit {
   public lat: number = 45.5206726;
   public lng: number = -122.67779689999999;
   public userFbObj: FirebaseObjectObservable<any>;
-  public currentUser: User;
   public timestamp: any;
+  public currentUser: User;
+  public userName: string;
+  public friendsUid: string;
   users: FirebaseListObservable<any[]>;
 
   public infoWindow: boolean = false;
@@ -44,7 +46,6 @@ export class UserComponent implements OnInit {
     this.users = this.userService.getAllUsers();
   }
 
-
   setLatLng(lat: number, lng: number) {
     this.lat = lat;
     this.lng = lng;
@@ -58,14 +59,28 @@ export class UserComponent implements OnInit {
 
 
   sendMessage(newMessage, friend){
-    let friendUid = friend.$key;
-    this.userService.sendMessage(newMessage, friendUid, this.uid);
+    // 1. get FriendsUid that matches
+    this.friendsUid =  "";
+
+    // this.userService.getFriendsUid(this.uid, friend.$key).subscribe( (data) => {
+    //   this.friendsUid = data.$key
+    // });
+    this.userService.getUserFriendsUid(this.uid)
+
+    this.userService.getFriendFriendsUid(friend.$key);
+
+    // 2. get friendName and userName
+    let friendName = friend.displayName;
+
+    this.userService.getUserById(this.uid).subscribe( (user) => {
+      this.userName = user.displayName;
+    });
+
+    // 3. call userService sendNessage function, passing variables
+    // this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
   }
 
   // hideInfoWindow(){
   //   this.infoWindow = false;
   // }
-
-
-
 }
