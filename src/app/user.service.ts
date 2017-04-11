@@ -79,19 +79,21 @@ export class UserService {
   }
 
   sendMessage(newMessage, friendUid, uid){
+    //create a message
     let message = {
         from: uid,
         to: friendUid,
         message: newMessage,
         timestamp: Date.now(),
     };
+
     this.messages.push(message).then( (data) =>{
+      //get $key of the message
       let messageKey = data.path.o[1];
 
+      //push to the each registeredUsers' data as a list
       this.af.database.list('registeredUsers/' + friendUid + '/messages').push(messageKey);
       this.af.database.list('registeredUsers/' + uid + '/messages').push(messageKey);
-
-
     });
 
 
