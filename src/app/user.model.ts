@@ -1,5 +1,5 @@
 export class User {
-	public messagesKey: Array<any>
+	public friendsId: Array<any>
 	constructor(
 		public name: string,
 		public email: string,

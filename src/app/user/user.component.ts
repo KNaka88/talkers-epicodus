@@ -24,6 +24,7 @@ export class UserComponent implements OnInit {
   public userName: string;
   public friendsUid: string;
   users: FirebaseListObservable<any[]>;
+  usersFriends: FirebaseListObservable<any[]>;
 
   public infoWindow: boolean = false;
 
@@ -44,6 +45,7 @@ export class UserComponent implements OnInit {
 
     this.userFbObj = this.userService.getUserById(this.uid);
     this.users = this.userService.getAllUsers();
+    this.usersFriends = this.userService.getFriends(this.uid);
   }
 
   setLatLng(lat: number, lng: number) {
@@ -55,6 +57,12 @@ export class UserComponent implements OnInit {
   showInfoWindow(){
     this.infoWindow = true;
     console.log(this.infoWindow);
+  }
+
+
+  addFriend(friendUid) {
+    this.userService.sendFriendRequest(this.uid, friendUid);
+    console.log(friendUid);
   }
 
 

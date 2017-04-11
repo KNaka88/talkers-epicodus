@@ -9,6 +9,7 @@
             <input #newMessage type="text">
             <button (click)="sendMessage(newMessage.value, user)">Send</button>
           </form>
+          <button (click)="addFriend(user.$key)">Send Friend Request</button>
         </ul>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
