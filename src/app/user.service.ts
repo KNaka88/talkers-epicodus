@@ -8,9 +8,11 @@ export class UserService {
   users:FirebaseListObservable<any[]>;
   public displayName:any;
   public email:any;
+  public messages: FirebaseListObservable<any>
 
   constructor(public af:AngularFire) {
     this.users = af.database.list('registeredUsers');
+    this.messages = af.database.list('messages');
    }
 
   login(email,password) {
@@ -74,5 +76,25 @@ export class UserService {
 
   getUserName(uid: string){
      return this.af.database.object('registeredUsers/' + uid);
+  }
+
+  sendMessage(newMessage, friendUid, uid){
+    let message = {
+        from: uid,
+        to: friendUid,
+        message: newMessage,
+        timestamp: Date.now(),
+    };
+    this.messages.push(message).then( (data) =>{
+      let messageKey = data.path.o[1];
+
+      this.af.database.list('registeredUsers/' + friendUid + '/messages').push(messageKey);
+      this.af.database.list('registeredUsers/' + uid + '/messages').push(messageKey);
+
+
+    });
+
+
+
   }
 }

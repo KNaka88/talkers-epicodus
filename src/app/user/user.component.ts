@@ -5,6 +5,7 @@ import { User } from '../user.model';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -53,6 +54,12 @@ export class UserComponent implements OnInit {
   showInfoWindow(){
     this.infoWindow = true;
     console.log(this.infoWindow);
+  }
+
+
+  sendMessage(newMessage, friend){
+    let friendUid = friend.$key;
+    this.userService.sendMessage(newMessage, friendUid, this.uid);
   }
 
   // hideInfoWindow(){

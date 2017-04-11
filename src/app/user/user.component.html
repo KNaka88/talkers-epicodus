@@ -5,7 +5,10 @@
         <ul>
           <li>{{user.displayName}}</li>
           <li>{{user.timestamp  | date:"MM/dd/yy hh:mm a"}}</li>
-
+          <form>
+            <input #newMessage type="text">
+            <button (click)="sendMessage(newMessage.value, user)">Send</button>
+          </form>
         </ul>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
