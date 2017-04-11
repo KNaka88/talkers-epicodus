@@ -15,3 +15,10 @@
     </sebm-google-map-marker>
   </div>
 </sebm-google-map>
+<app-friends-list></app-friends-list>
+
+<div *ngIf="allFriends">
+  <div *ngFor="let friendFire of allFriends">
+      <li>{{friendFire[1].$value}}</li>
+  </div>
+</div>

@@ -95,7 +95,7 @@ export class UserService {
     };
     let fbFriends = this.af.database.list('friends');
     fbFriends.push(pushObj).then((pushObj) => {
-      console.log("this is the push id key: " +pushObj.key);
+      // console.log("this is the push id key: " +pushObj.key);
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
       userFriendsList.push({key: pushObj.key});
     });
@@ -142,5 +142,17 @@ export class UserService {
       // }
     }
     return "no matching";
+  }
+
+  getFriendsTableById(userFriendsList){
+
+    let friendsTableList = [];
+      for(let i=0; i<userFriendsList.length; i++){
+        this.af.database.list('friends/' + userFriendsList[i].key).subscribe( (data)=> {
+        let fireData = data;
+        friendsTableList.push(fireData);
+        });
+      }
+     return friendsTableList;
   }
 }

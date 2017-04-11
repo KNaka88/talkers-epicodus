@@ -25,8 +25,12 @@ export class UserComponent implements OnInit {
   public friendsUid: string;
   users: FirebaseListObservable<any[]>;
   usersFriends: FirebaseListObservable<any[]>;
-
   public infoWindow: boolean = false;
+
+  public userFriendsList: any;
+  public friendFriendsList: any;
+  public allFriends: any[];
+
 
   constructor(
     private userService: UserService,
@@ -63,6 +67,9 @@ export class UserComponent implements OnInit {
   addFriend(friendUid) {
     this.userService.sendFriendRequest(this.uid, friendUid);
     console.log(friendUid);
+
+    this.getAllFriendsById();
+
   }
 
 
@@ -71,21 +78,20 @@ export class UserComponent implements OnInit {
     // 1. get FriendsUid that matches
     this.friendsUid =  "";
 
-    let userFriendsList: any;
-    let friendFriendsList: any;
+
 
     this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
-      userFriendsList = userFriendsListData;
+      this.userFriendsList = userFriendsListData;
     });
 
     this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
-      friendFriendsList = friendFriendsListData;
+      this.friendFriendsList = friendFriendsListData;
     });
 
-    console.log(userFriendsList);
-    console.log(friendFriendsList);
+    // console.log(this.userFriendsList);
+    // console.log(this.friendFriendsList);
 
-    alert(this.userService.checkIfMutualFriends(userFriendsList, friendFriendsList));
+    alert(this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList));
 
     // 2. get friendName and userName
     let friendName = friend.displayName;
@@ -97,6 +103,16 @@ export class UserComponent implements OnInit {
 
     // 3. call userService sendNessage function, passing variables
     // this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
+  }
+
+
+  getAllFriendsById(){
+    this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
+      this.userFriendsList = userFriendsListData;
+      this.allFriends = this.userService.getFriendsTableById(this.userFriendsList);
+      console.log(this.allFriends);
+    });
+    // console.log("allFriends");
   }
 
   // hideInfoWindow(){
