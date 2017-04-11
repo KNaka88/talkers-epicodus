@@ -5,7 +5,7 @@
         <ul>
           <li>{{user.displayName}}</li>
           <li>{{user.timestamp  | date:"MM/dd/yy hh:mm a"}}</li>
-
+          <button (click)="addFriend(user.$key)">Send Friend Request</button>
         </ul>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>

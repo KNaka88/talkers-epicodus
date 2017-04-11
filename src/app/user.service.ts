@@ -5,19 +5,21 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  users:FirebaseListObservable<any[]>;
-  public displayName:any;
-  public email:any;
+  users: FirebaseListObservable<any[]>;
+  public displayName: any;
+  public email: any;
+  public fbListFriends: FirebaseListObservable<any[]>;
+  public pendingFriends: any[];
 
-  constructor(public af:AngularFire) {
+  constructor(public af: AngularFire) {
     this.users = af.database.list('registeredUsers');
-   }
+  }
 
-  login(email,password) {
+  login(email, password) {
     return this.af.auth.login(
       {
         email: email,
-        password:password,
+        password: password,
       },
       {
         provider: AuthProviders.Password,
@@ -25,17 +27,17 @@ export class UserService {
       });
   }
 
-  loginGoogle(){
+  loginGoogle() {
     return this.af.auth.login(
       {
         provider: AuthProviders.Google,
         method: AuthMethods.Popup
       }
-    )
+    );
   }
 
 
-  registerUser(email, password){
+  registerUser(email, password) {
     return this.af.auth.createUser({
       email: email,
       password: password,
@@ -56,7 +58,7 @@ export class UserService {
     return this.af.database.object("registeredUsers/" + uid);
   }
 
-  updateUserInfo(lat, lng, uid){
+  updateUserInfo(lat, lng, uid) {
     this.af.database.object("registeredUsers/" + uid).update({
       lat: lat,
       lng: lng,
@@ -68,11 +70,47 @@ export class UserService {
     return this.users;
   }
 
-  logout(){
+  logout() {
     return this.af.auth.logout();
   }
 
-  getUserName(uid: string){
-     return this.af.database.object('registeredUsers/' + uid);
+  getUserName(uid: string) {
+    return this.af.database.object('registeredUsers/' + uid);
+  }
+
+  getFriends(uid) {
+    this.fbListFriends = this.af.database.list('registeredUsers/' + uid + "/friends");
+    console.log(this.fbListFriends);
+    return this.fbListFriends;
+  }
+
+  sendFriendRequest(userUid, friendUid) {
+    let pushObj = {
+      friend1Id: userUid,
+      friend2Id: friendUid
+    };
+    let fbFriends = this.af.database.list('friends');
+    fbFriends.push(pushObj).then((pushObj) => {
+      console.log("this is the push id key: " +pushObj.key);
+      let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
+      userFriendsList.push({key: pushObj.key});
+    });
+
+
+
+
+
+
+    // this.pendingFriends.push(fbFriends);
+    // fbFriends.push({
+    //   friend1Id: userUid,
+    //   friend2Id: friendUid
+    // });
+
+    //   acceptFriendRequest(friendId, Uid)
+    //   let userFriendsList = this.af.database.list('registeredUsers' + userUid + "/friends");
+    //   let friendsFriendsList = this.af.database.list('registeredUsers' + friendUid + "/friends");
+
+    //   friendsFriendsList.push(friendEntry.$key);
   }
 }
