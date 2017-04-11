@@ -1,10 +1,10 @@
 export var masterFirebaseConfig = {
-  apiKey: "AIzaSyCSkMKj9WDaXHKZ9O_BlkOdMsyZswweq6A",
-  authDomain: "stalking-caf97.firebaseapp.com",
-  databaseURL: "https://stalking-caf97.firebaseio.com",
-  projectId: "stalking-caf97",
-  storageBucket: "stalking-caf97.appspot.com",
-  messagingSenderId: "668974449213"
+  apiKey: "AIzaSyCFR2JoLvIrTiQm2ZZ7NiFFeXZ3yI2ec3M",
+  authDomain: "talkers-84665.firebaseapp.com",
+  databaseURL: "https://talkers-84665.firebaseio.com",
+  projectId: "talkers-84665",
+  storageBucket: "talkers-84665.appspot.com",
+  messagingSenderId: "4666904647"
   };
 
 export var mapKey = "AIzaSyCtuL0SY4ZYX4GeVwywYaWup-PqyA39-I4";

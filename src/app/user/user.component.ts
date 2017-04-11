@@ -66,16 +66,26 @@ export class UserComponent implements OnInit {
   }
 
 
+
   sendMessage(newMessage, friend){
     // 1. get FriendsUid that matches
     this.friendsUid =  "";
 
-    // this.userService.getFriendsUid(this.uid, friend.$key).subscribe( (data) => {
-    //   this.friendsUid = data.$key
-    // });
-    this.userService.getUserFriendsUid(this.uid)
+    let userFriendsList: any;
+    let friendFriendsList: any;
 
-    this.userService.getFriendFriendsUid(friend.$key);
+    this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
+      userFriendsList = userFriendsListData;
+    });
+
+    this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
+      friendFriendsList = friendFriendsListData;
+    });
+
+    console.log(userFriendsList);
+    console.log(friendFriendsList);
+
+    alert(this.userService.checkIfMutualFriends(userFriendsList, friendFriendsList));
 
     // 2. get friendName and userName
     let friendName = friend.displayName;
@@ -83,6 +93,7 @@ export class UserComponent implements OnInit {
     this.userService.getUserById(this.uid).subscribe( (user) => {
       this.userName = user.displayName;
     });
+
 
     // 3. call userService sendNessage function, passing variables
     // this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
