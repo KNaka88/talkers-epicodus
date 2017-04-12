@@ -35,11 +35,14 @@ export class RegistrationComponent implements OnInit {
       // when register user method failed, catch error
       .catch((error) => {
         this.error = error;
+        alert(error.message);
       });
     })
     // when register method failed, catch error
     .catch((error) => {
         this.error = error;
+        alert(error.message);
+        console.log(error)
     });
   }
   iconPreview(e) {

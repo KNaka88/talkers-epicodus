@@ -1,6 +1,12 @@
 #s {
   color: white;
 }
+
 #s:hover {
   color: red;
+}
+
+.our-logo {
+    width: 100%;
+    text-align:center;
 }
