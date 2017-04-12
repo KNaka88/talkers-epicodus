@@ -49,6 +49,7 @@ export class UserService {
   }
 
   saveUserInfoFromForm(uid: string, newUser: User) {
+    console.log("saved user");
     return this.af.database.object('registeredUsers/' + uid).set({
       displayName: newUser.name,
       email: newUser.email,
@@ -105,7 +106,7 @@ export class UserService {
     fbFriends.push(pushObj).then((pushObj) => {
       // console.log("this is the push id key: " +pushObj.key);
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
-      userFriendsList.push({key: pushObj.key});
+      userFriendsList.push({Pushkey: pushObj.key});
     });
   }
 
@@ -121,8 +122,11 @@ export class UserService {
     this.messages.push(message).then( (data) =>{
       //get $key of the message
       let messageKey = data.path.o[1];
+      console.log("Check friendsuid and messagekey");
+      console.log(friendsUid);
+      console.log(messageKey);
       //push to the friends table data as a list
-      this.af.database.list('friends/' + friendsUid + '/').push(messageKey);
+      this.af.database.list('friends/' + friendsUid + '/messages').push(messageKey);
     });
   }
 
@@ -149,7 +153,7 @@ export class UserService {
       //   return this.af.database.list('friends/' + userLists[i]);
       // }
     }
-    return "no matching";
+    return "noMatching";
   }
 
   getFriendsTableById(userFriendsList){
@@ -162,5 +166,9 @@ export class UserService {
         });
       }
      return friendsTableList;
+  }
+
+  getMessagesById(friendsId) {
+    return this.af.database.list('friends/' + friendsId + '/messages');
   }
 }

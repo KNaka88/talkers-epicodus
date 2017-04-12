@@ -26,10 +26,10 @@ export class UserComponent implements OnInit {
   users: FirebaseListObservable<any[]>;
   usersFriends: FirebaseListObservable<any[]>;
   public infoWindow: boolean = false;
-
   public userFriendsList: any;
   public friendFriendsList: any;
   public allFriends: any[];
+  public friend:FirebaseObjectObservable<any>;
 
 
   constructor(
@@ -73,26 +73,24 @@ export class UserComponent implements OnInit {
 
   }
 
-
-
   sendMessage(newMessage, friend){
     // 1. get FriendsUid that matches
     this.friendsUid =  "";
 
-
-
+    //get user friends list
     this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
       this.userFriendsList = userFriendsListData;
     });
 
+    // get friend's friend list
     this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
       this.friendFriendsList = friendFriendsListData;
     });
 
-    // console.log(this.userFriendsList);
-    // console.log(this.friendFriendsList);
 
-    alert(this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList));
+    this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
+
+
 
     // 2. get friendName and userName
     let friendName = friend.displayName;
@@ -102,9 +100,10 @@ export class UserComponent implements OnInit {
     });
 
     // 3. call userService sendNessage function, passing variables
-    // this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
+    if(this.friendsUid !== "noMatching"){
+      this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
+    }
   }
-
 
   getAllFriendsById(){
     this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
@@ -112,10 +111,22 @@ export class UserComponent implements OnInit {
       this.allFriends = this.userService.getFriendsTableById(this.userFriendsList);
       console.log(this.allFriends);
     });
-    // console.log("allFriends");
   }
 
   // hideInfoWindow(){
   //   this.infoWindow = false;
   // }
+
+  sendFriendData(user){
+
+    //NEED TO WORK ON
+    // this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
+    // this.userService.getMessages(this.friend.uid);
+
+    this.friend = user;
+    console.log("clicked");
+    console.log(user);
+  }
+
+
 }

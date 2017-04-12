@@ -4,7 +4,7 @@
 <div class="google-map">
 <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
   <div *ngFor="let user of users | async">
-    <sebm-google-map-marker class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
+    <sebm-google-map-marker (markerClick)="sendFriendData(user)" class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
       <sebm-google-map-info-window  [disableAutoPan]="true">
         <ul>
           <li>{{user.displayName}}</li>
@@ -26,4 +26,8 @@
   <div *ngFor="let friendFire of allFriends">
       <li>{{friendFire[1].$value}}</li>
   </div>
+</div>
+
+<div *ngIf="friend">
+  <app-message [friend]="friend"></app-message>
 </div>
