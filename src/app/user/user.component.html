@@ -1,3 +1,7 @@
+<nav>
+  Welcome {{(userFbObj | async)?.displayName}}
+</nav>
+<div class="google-map">
 <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
   <div *ngFor="let user of users | async">
     <sebm-google-map-marker class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
@@ -15,6 +19,7 @@
     </sebm-google-map-marker>
   </div>
 </sebm-google-map>
+</div>
 <app-friends-list></app-friends-list>
 
 <div *ngIf="allFriends">

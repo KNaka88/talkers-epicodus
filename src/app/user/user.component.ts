@@ -50,6 +50,7 @@ export class UserComponent implements OnInit {
     this.userFbObj = this.userService.getUserById(this.uid);
     this.users = this.userService.getAllUsers();
     this.usersFriends = this.userService.getFriends(this.uid);
+    console.log(this.userFbObj);
   }
 
   setLatLng(lat: number, lng: number) {
@@ -99,7 +100,6 @@ export class UserComponent implements OnInit {
     this.userService.getUserById(this.uid).subscribe( (user) => {
       this.userName = user.displayName;
     });
-
 
     // 3. call userService sendNessage function, passing variables
     // this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);

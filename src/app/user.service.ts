@@ -5,9 +5,9 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  users:FirebaseListObservable<any[]>;
-  public displayName:any;
-  public email:any;
+  users: FirebaseListObservable<any[]>;
+  public displayName: any;
+  public email: any;
   public messages: FirebaseListObservable<any>;
   public friendsListOfUser: any;
   public friendsListOfFriend: any;
@@ -67,6 +67,14 @@ export class UserService {
       lat: lat,
       lng: lng,
       timestamp: Date.now()
+    });
+  }
+  updateGoogleLoginInfo (googleDisplayName: string, googleEmail: string, uid: string, icon: string) {
+    icon = icon + '?sz=24';
+    this.af.database.object('registeredUsers/' + uid).update({
+      displayName: googleDisplayName,
+      email: googleEmail,
+      icon: icon
     });
   }
 

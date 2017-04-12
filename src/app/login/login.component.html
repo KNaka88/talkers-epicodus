@@ -1,7 +1,3 @@
-<p>
-  login works!
-</p>
-
 <form>
   <label>Email address</label>
   <input #newEmail type="email">
@@ -9,4 +5,4 @@
   <input type="password" #newPassword>
   <button (click)="login(newEmail.value, newPassword.value)">Login</button>
 </form>
-<button type="button" class="btn" (click)="loginGoogleButton()">Google Login</button>
+<img src="../assets/img/btn_google_signin_light_normal_web.png" alt="Login With Google" (click)="loginGoogleButton()" class="clickable" />
