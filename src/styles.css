@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 .sebm-google-map-container {
-  height: 500px;
+  display: block;
+  height: 94vh;
+}
+
+body {
+  background-color: pink;
+}
+
+.title{
+  font-family: 'Megrim', cursive;
+  font-weight:900;
+  text-align: center;
 }

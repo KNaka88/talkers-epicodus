@@ -12,6 +12,7 @@ import { User } from '../user.model';
 })
 export class RegistrationComponent implements OnInit {
   public error: any;
+  public icon = '1';
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -40,6 +41,12 @@ export class RegistrationComponent implements OnInit {
     .catch((error) => {
         this.error = error;
     });
+  }
+  iconPreview(e) {
+    console.log(e);
+  }
+  setPreview(e){
+    return 'assets/img/icon' + e + '.png';
   }
 
 }

@@ -1,8 +1,8 @@
 <form>
   <label>Email address</label>
-  <input #newEmail type="email">
+  <input #newEmail type="email" class="form-control"><br>
   <label>Password</label>
-  <input type="password" #newPassword>
+  <input type="password" #newPassword class="form-control"><br>
   <button (click)="login(newEmail.value, newPassword.value)">Login</button>
 </form>
 <img src="../assets/img/btn_google_signin_light_normal_web.png" alt="Login With Google" (click)="loginGoogleButton()" class="clickable" />

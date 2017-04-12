@@ -1,17 +1,17 @@
-
 <form>
   <label for="name">Name</label>
-  <input #newName type="text" id="name">
+  <input #newName type="text" id="name" class="form-control"><br>
   <label for="email">Email</label>
-  <input #newEmail type="email" id="email">
+  <input #newEmail type="email" id="email" class="form-control"><br>
   <label for="password">Password</label>
-  <input #newPassword type="password" id='password'>
-  <select #newIcon>
-  <option value="1">Umbrella</option>
-  <option value="2">Cat</option>
-  <option value="3">Grandfather</option>
-  <option value="4">Dog</option>
-  <option value="5">Couple</option>
-</select>
-  <button (click)="registerUserButton(newName.value, newEmail.value, newPassword.value, newIcon.value)">Create Account</button>
+  <input #newPassword type="password" id='password' class="form-control"><br>
+  <select #newIcon class="form-control" (change)=iconPreview($event.target.value)>
+    <option value="1">Umbrella</option>
+    <option value="2">Cat</option>
+    <option value="3">Grandfather</option>
+    <option value="4">Dog</option>
+    <option value="5">Couple</option>
+  </select><br>
+  <img [src]="setPreview(icon)" alt="" /><br>
+  <button (click)="registerUserButton(newName.value, newEmail.value, newPassword.value, newIcon.value)" class="btn">Create Account</button>
 </form>

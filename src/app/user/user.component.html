@@ -2,6 +2,7 @@
   <span class="navbar-text">
   Welcome {{(userFbObj | async)?.displayName}}
 </span>
+<button type="button" name="button"class="btn navbar-btn" (click)="logoutButtonClicked()">Logout</button>
 </nav>
 <div class="row">
   <div class="col-md-8">

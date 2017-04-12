@@ -20,6 +20,7 @@ login(email, password) {
   .catch((error: any) => {
     if (error) {
       this.error = error;
+      console.log(error);
     }
   });
 }
