@@ -10,9 +10,13 @@ import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
   providers: [UserService]
 })
 export class MessageComponent implements AfterViewChecked {
-  @Input() friend: FirebaseObjectObservable<any>;
-
+  @Input() friend: any;
+  @Input() friendsUid: string;
+  @Input() userFbObj: FirebaseObjectObservable<any>;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+  public newMessage: string;
+  public messages:FirebaseListObservable<any>;
 
 
   ngAfterViewChecked() {
@@ -25,10 +29,8 @@ export class MessageComponent implements AfterViewChecked {
     }catch(err) {console.log("scroll to bottom failed")}
   }
 
-  public newMessage:string;
-  public messages:FirebaseListObservable<any>
 
-  constructor(private userService:UserService) { }
+  constructor(private userService: UserService) { }
 
   isYou(email) {
     if(email === this.userService.email) {
@@ -38,18 +40,30 @@ export class MessageComponent implements AfterViewChecked {
     }
   }
 
-    isMe(email) {
-      if(email === this.userService.email) {
-        return false;
-      } else {
-        return true;
-      }
+  isMe(email) {
+    if(email === this.userService.email) {
+      return false;
+    } else {
+      return true;
+    }
   }
-  sendMessage(userName, friendUid, message){
-    this.userService.sendMessage(this.newMessage, this.friend, userName, friendUid);
+
+  sendMessage(){
+
+    let userName = "";
+    this.userFbObj.subscribe((user) => {
+      console.log(user);
+      userName = user.displayName;
+    })
+
+    console.log(this.newMessage);
+    console.log(this.friend.displayName);
+    console.log(this.userFbObj);
+    this.userService.sendMessage(this.newMessage, this.friend.displayName, userName, this.friendsUid);
     this.newMessage="";
   }
 
-
-
+  // getMessagesById(){
+  //   this.messages = this.userService.getMessagesById(this.friendsUid);
+  // }
 }

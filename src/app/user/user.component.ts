@@ -74,22 +74,8 @@ export class UserComponent implements OnInit {
   }
 
   sendMessage(newMessage, friend){
-    // 1. get FriendsUid that matches
-    this.friendsUid =  "";
 
-    //get user friends list
-    this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
-      this.userFriendsList = userFriendsListData;
-    });
-
-    // get friend's friend list
-    this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
-      this.friendFriendsList = friendFriendsListData;
-    });
-
-
-    this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
-
+    this.getMutualFriendId(friend);
 
 
     // 2. get friendName and userName
@@ -118,14 +104,29 @@ export class UserComponent implements OnInit {
   // }
 
   sendFriendData(user){
-
-    //NEED TO WORK ON
-    // this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
-    // this.userService.getMessages(this.friend.uid);
-
-    this.friend = user;
-    console.log("clicked");
+    console.log("sendFriendData");
     console.log(user);
+    this.friend = user;
+    this.getMutualFriendId(user);
+  }
+
+
+  getMutualFriendId(friend){
+    // 1. get FriendsUid that matches
+    this.friendsUid =  "";
+
+    //get user friends list
+    this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
+      this.userFriendsList = userFriendsListData;
+    });
+
+    // get friend's friend list
+    this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
+      this.friendFriendsList = friendFriendsListData;
+    });
+
+
+    this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
   }
 
 
