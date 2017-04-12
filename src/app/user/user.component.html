@@ -14,11 +14,15 @@
               <ul>
                 <li>{{user.displayName}}</li>
                 <li>{{user.timestamp | date:"MM/dd/yy hh:mm a"}}</li>
-                <form>
-                  <input #newMessage type="text">
-                  <button (click)="sendMessage(newMessage.value, user)">Send</button>
-                </form>
-                <button (click)="addFriend(user.$key)">Send Friend Request</button>
+                <div *ngIf="status; else elseBlock">
+                  <form >
+                    <input #newMessage type="text">
+                    <button (click)="sendMessage(newMessage.value, user)">Send</button>
+                  </form>
+                </div>
+                <ng-template #elseBlock>
+                  <button (click)="addFriend(user.$key)">Send Friend Request</button>
+                </ng-template>
               </ul>
             </sebm-google-map-info-window>
           </sebm-google-map-marker>
@@ -32,7 +36,7 @@
 
     <div *ngIf="allFriends">
       <div *ngFor="let friendFire of allFriends">
-        <li>{{friendFire[1].$value}}</li>
+        <li>{{friendFire[3].$value}}</li>
       </div>
     </div>
 
