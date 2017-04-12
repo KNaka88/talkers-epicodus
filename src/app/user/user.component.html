@@ -1,33 +1,46 @@
-<nav>
+<nav class="navbar navbar-inverse bg-faded">
+  <span class="navbar-text">
   Welcome {{(userFbObj | async)?.displayName}}
+</span>
 </nav>
-<div class="google-map">
-<sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
-  <div *ngFor="let user of users | async">
-    <sebm-google-map-marker (markerClick)="sendFriendData(user)" class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
-      <sebm-google-map-info-window  [disableAutoPan]="true">
-        <ul>
-          <li>{{user.displayName}}</li>
-          <li>{{user.timestamp  | date:"MM/dd/yy hh:mm a"}}</li>
-          <form>
-            <input #newMessage type="text">
-            <button (click)="sendMessage(newMessage.value, user)">Send</button>
-          </form>
-          <button (click)="addFriend(user.$key)">Send Friend Request</button>
-        </ul>
-      </sebm-google-map-info-window>
-    </sebm-google-map-marker>
-  </div>
-</sebm-google-map>
-</div>
-<app-friends-list></app-friends-list>
+<div class="row">
+  <div class="col-md-8">
+    <div class="google-maps">
+      <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
+        <div *ngFor="let user of users | async">
+          <sebm-google-map-marker (markerClick)="sendFriendData(user)" class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
+            <sebm-google-map-info-window [disableAutoPan]="true">
+              <ul>
+                <li>{{user.displayName}}</li>
+                <li>{{user.timestamp | date:"MM/dd/yy hh:mm a"}}</li>
+                <form>
+                  <input #newMessage type="text">
+                  <button (click)="sendMessage(newMessage.value, user)">Send</button>
+                </form>
+                <button (click)="addFriend(user.$key)">Send Friend Request</button>
+              </ul>
+            </sebm-google-map-info-window>
+          </sebm-google-map-marker>
+        </div>
+      </sebm-google-map>
+    </div>
 
-<div *ngIf="allFriends">
-  <div *ngFor="let friendFire of allFriends">
-      <li>{{friendFire[1].$value}}</li>
+  </div>
+  <div class="col-m-4">
+    <app-friends-list></app-friends-list>
+
+    <div *ngIf="allFriends">
+      <div *ngFor="let friendFire of allFriends">
+        <li>{{friendFire[1].$value}}</li>
+      </div>
+    </div>
+
+    <div *ngIf="friend">
+      <app-message [friend]="friend"></app-message>
+    </div>
   </div>
 </div>
 
-<div *ngIf="friend">
-  <app-message [friend]="friend"></app-message>
+<div class="footer">
+
 </div>

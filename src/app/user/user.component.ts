@@ -128,5 +128,9 @@ export class UserComponent implements OnInit {
     console.log(user);
   }
 
+  logoutButtonClicked() {
+    this.userService.logout();
+  }
+
 
 }
