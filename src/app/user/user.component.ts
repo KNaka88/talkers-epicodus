@@ -95,7 +95,6 @@ export class UserComponent implements OnInit {
     this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
       this.userFriendsList = userFriendsListData;
       this.allFriends = this.userService.getFriendsTableById(this.userFriendsList);
-      console.log(this.allFriends);
     });
   }
 
@@ -104,8 +103,6 @@ export class UserComponent implements OnInit {
   // }
 
   sendFriendData(user){
-    console.log("sendFriendData");
-    console.log(user);
     this.friend = user;
     this.getMutualFriendId(user);
   }

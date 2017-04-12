@@ -157,7 +157,6 @@ export class UserService {
   }
 
   getFriendsTableById(userFriendsList){
-
     let friendsTableList = [];
       for(let i=0; i<userFriendsList.length; i++){
         this.af.database.list('friends/' + userFriendsList[i].key).subscribe( (data)=> {
@@ -168,7 +167,27 @@ export class UserService {
      return friendsTableList;
   }
 
-  getMessagesById(friendsId) {
+  getMessagesId(friendsId) {
     return this.af.database.list('friends/' + friendsId + '/messages');
+  }
+
+  getMessagesById(dataLists){
+    console.log("getMessagesById...");
+    let messagesList = [];
+
+      for(var i =0; i<dataLists.length; i++) {
+        let data = this.af.database.list('messages/' + dataLists[i].$value)
+        messagesList.push(data);
+
+      // for(var i =0; i<messages.length; i++) {
+      //   this.af.database.list('messages/' + messages[i].$value).subscribe( (message)=> {
+      //     let messageData = message;
+      //     messagesList.push(messageData);
+      //   });
+      // }
+      // console.log(messagesList);
+      };
+      console.log(dataLists);
+    return messagesList;
   }
 }

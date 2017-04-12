@@ -1,16 +1,25 @@
-{{friend.displayName}}
+<li (click)="getMessages()">{{friend.displayName}}</li>
 
 <div class="container">
   <div class="row">
     <div class="col-md-8">
       <div class="bs-example" id="messages">
         <div class="bs-example" id="messages" #scrollMe>
-          <div *ngFor="let message of messages | async">
-            <div class="bubble">
-              <p>{{message.message}}</p>
-              <div class="author">
-                {{message.from}} | {{message.timestamp | date: "MM/dd/yy hh:mm a"}}
-              </div>
+          <div *ngFor="let messageArray of results">
+            <li>{{ messageArray[0].$key}}: {{messageArray[0].$value}}</li>
+            <li>{{ messageArray[3].$key}}: {{messageArray[3].$value}}</li>
+            <li>{{ messageArray[1].$key}}: {{messageArray[1].$value}}</li>
+
+            <!-- <div *ngFor="let message of messageArray"> -->
+              <div class="bubble">
+
+                <!-- <p>{{message.message}}</p>
+                <div class="author">
+                  {{message.from}} | {{message.timestamp | date: "MM/dd/yy hh:mm a"}}
+                </div> -->
+                <!-- <li>Hello</li>
+                <li>{{message[0].$value}}</li>-->
+              <!-- </div> -->
             </div>
           </div>
         </div>
