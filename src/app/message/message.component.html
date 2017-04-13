@@ -1,6 +1,6 @@
       <div class="bs-example message-box" id="messages" #scrollMe>
         <div *ngFor="let messageArray of results">
-          <div class="bubble">
+          <div class="bubble" [class.you]="isMe(messageArray[4].$value)" [class.me]="isMe(messageArray[4].$value)  === false">
             <p>{{ messageArray[1].$value}}</p>
             <div class="message-bottom-tag">
               {{messageArray[0].$value}} | {{messageArray[2].$value | date: "MM/dd/yy hh:mm a"}}
@@ -12,7 +12,7 @@
     <div *ngFor="let friendTable of friendsTableFirebase |async">
       <div *ngIf="friendTable.$key ==='status'">
         <figure *ngIf="friendTable.$value === 'true'; else elseBlock" class="highlight">
-          <input type="textarea" class="message-text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+          <input type="textarea" class="message-text form-control send-box" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
           <a class="send-message" (click)="sendMessage()">SEND</a>
         </figure>
       </div>

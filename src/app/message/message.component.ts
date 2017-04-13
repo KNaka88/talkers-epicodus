@@ -20,7 +20,14 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   public messagesId:FirebaseListObservable<any>;
   public messages:any;
   public results: any[];
+  public userName:string;
+  public userEmail:string;
+
   ngOnInit(){
+    this.userFbObj.subscribe((user) => {
+      this.userName = user.displayName;
+      this.userEmail = user.email;
+    })
   }
 
   ngOnChanges() {
@@ -42,7 +49,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   constructor(private userService: UserService) { }
 
   isYou(email) {
-    if(email === this.userService.email) {
+    if(email === this.userEmail) {
       return true;
     } else {
       return false;
@@ -50,7 +57,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   }
 
   isMe(email) {
-    if(email === this.userService.email) {
+    if(email === this.userEmail) {
       return false;
     } else {
       return true;
@@ -59,11 +66,8 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
   sendMessage(){
     let userName = "";
-    this.userFbObj.subscribe((user) => {
-      userName = user.displayName;
-    })
-
-    this.userService.sendMessage(this.newMessage, this.friend.displayName, userName, this.friendsUid);
+    let userEmail = "";
+    this.userService.sendMessage(this.newMessage, this.friend.displayName, userName, this.friendsUid, userEmail );
     this.newMessage="";
     this.scrollToBottom();
   }

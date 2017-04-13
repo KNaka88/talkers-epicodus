@@ -2,6 +2,7 @@
 .sebm-google-map-container {
   display: block;
   height: 94vh;
+  box-shadow: 3px 3px 3px lightgray;
 }
 
 body {
@@ -12,4 +13,11 @@ body {
   font-family: 'Megrim', cursive;
   font-weight:900;
   text-align: center;
+}
+
+@media screen and (max-width: 992px) {
+  .sebm-google-map-container {
+    height: 50vh;
+  }
+
 }

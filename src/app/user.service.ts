@@ -113,13 +113,14 @@ export class UserService {
     });
   }
 
-  sendMessage(newMessage, friendName, userName, friendsUid){
+  sendMessage(newMessage, friendName, userName, friendsUid, userEmail){
     //create a message
     let message = {
         from: userName,
         to: friendName,
         message: newMessage,
         timestamp: Date.now(),
+        userEmail: userEmail
     };
 
     this.messages.push(message).then( (data) =>{

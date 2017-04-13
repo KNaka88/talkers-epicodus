@@ -10,7 +10,7 @@
 }
 
 .message-box {
-  height: 50vh;
+  height: 90vh;
   overflow: scroll;
   width: inherit;
   background: white ;
@@ -19,4 +19,38 @@
 
 .message-bottom-tag {
   font-size: 11px;
+}
+
+.me {
+  display: inherit;
+  margin: 5px 45px 5px 20px;
+}
+.me::before {
+  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+  left: -9px;
+}
+.you {
+  display: inherit;
+  margin: 5px 20px 5px 45px;
+  background: whitesmoke;
+  color: black;
+}
+.you::before {
+  box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+  right: -9px;
+}
+
+.send-box{
+  width: 90%;
+
+}
+
+@media screen and (max-width: 992px) {
+  .message-box {
+    height: 40vh;
+  }
+.send-box{
+  margin: 0 auto;
+  width: 80%;
+}
 }

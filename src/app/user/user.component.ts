@@ -23,6 +23,7 @@ export class UserComponent implements OnInit {
   public timestamp: any;
   public currentUser: User;
   public userName: string;
+  public userEmail: string;
   public friendsUid: string;
   users: FirebaseListObservable<any[]>;
   usersFriends: FirebaseListObservable<any[]>;
@@ -83,11 +84,12 @@ export class UserComponent implements OnInit {
 
     this.userService.getUserById(this.uid).subscribe( (user) => {
       this.userName = user.displayName;
+      this.userEmail = user.email;
     });
 
     // 3. call userService sendNessage function, passing variables
     if(this.friendsUid !== "noMatching"){
-      this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid);
+      this.userService.sendMessage(newMessage, friendName, this.userName, this.friendsUid, this.userEmail);
     }
   }
 
