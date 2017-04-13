@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
   public status: boolean = false;
   public friendRequestStatus: any;
   public friendsTableFirebase: FirebaseListObservable<any>;
-
+  public friend1Id: any;
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -102,22 +102,28 @@ export class UserComponent implements OnInit {
 
   sendFriendData(user){
     this.friend = user;
+    this.friendRequestStatus = "";
     this.getMutualFriendId(user);
     this.userService.getFriendRequestStatus(this.friendsUid).subscribe((result)=>{
-        let user1Id = result[0].$value;
-        this.status = result[2].$value;
-
-        if(this.uid === user1Id){
-          //this person sent friend request
-          this.friendRequestStatus = "YouSent";
-        }else{
-          //friend sent friend request
-          this.friendRequestStatus = "FriendSent";
+        if(result.length !== 0 ){ //avoid error when no friend request is sent yet (empty)
+          result.forEach((object)=> {
+            if(object.$key === "friend1Id"){
+              this.friend1Id = object.$value;
+            }else if (object.$key === "status"){
+              this.status = object.$value;
+            }
+          });
+          if(this.uid === this.friend1Id){
+            //this person sent friend request
+            this.friendRequestStatus = "YouSent";
+          }else{
+            //friend sent friend request
+            this.friendRequestStatus = "FriendSent";
+          }
         }
     });
 
     this.friendsTableFirebase = this.userService.getFriendRequestStatus(this.friendsUid);
-    console.log(this.friendsTableFirebase);
 
   }
 

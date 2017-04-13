@@ -19,36 +19,34 @@
 
 
                 <!-- need to work on status (friendsTableFirebase) -->
-                <div *ngIf="friendsTableFirebase">
-                  <div *ngFor="let friendTable of friendsTableFirebase |async">
-                    <li>{{friendTable.$value}}</li>
-                  </div>
-                </div>
-
-
-
-
-
                 <div *ngIf="uid !== user.$key">
-                  <div *ngIf="status; else elseBlock">
-                    <form>
-                      <input #newMessage type="text">
-                      <button (click)="sendMessage(newMessage.value, user)">Send</button>
-                    </form>
+                  <div *ngIf="friendRequestStatus === ''">
+                    <button (click)="addFriend(user.$key)">Send Friend Request</button>
                   </div>
-                  <ng-template #elseBlock>
-                    <div *ngIf="!friendRequestStatus">
-                      <button (click)="addFriend(user.$key)">Send Friend Request</button>
+                    <div *ngFor="let friendTable of friendsTableFirebase |async">
+                      <div *ngIf="friendTable.$key ==='status'">
+                        <div *ngIf="friendTable.$value === 'true'; else elseBlock">
+                          <form>
+                            <input #newMessage type="text">
+                            <button (click)="sendMessage(newMessage.value, user)">Send</button>
+                          </form>
+                        </div>
+                        <ng-template #elseBlock>
+                          <!-- <div *ngIf="friendRequestStatus === ''">
+                            <button (click)="addFriend(user.$key)">Send Friend Request</button>
+                          </div> -->
+                          <div *ngIf="friendRequestStatus === 'YouSent'">
+                            <h6>Friend Request Sent</h6>
+                          </div>
+                          <div *ngIf="friendRequestStatus === 'FriendSent'">
+                            <h6>Waiting Friend Request Confirmation</h6>
+                            <button (click)="confirmFriendRequest(user)">Confirm</button>
+                          </div>
+                        </ng-template>
+                      </div>
                     </div>
-                    <div *ngIf="friendRequestStatus === 'YouSent'">
-                      <h6>Friend Request Sent</h6>
-                    </div>
-                    <div *ngIf="friendRequestStatus === 'FriendSent'">
-                      <h6>Waiting Friend Request Confirmation</h6>
-                      <button (click)="confirmFriendRequest(user)">Confirm</button>
-                    </div>
-                  </ng-template>
                 </div>
+
               </ul>
             </sebm-google-map-info-window>
 
