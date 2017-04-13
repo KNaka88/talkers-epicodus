@@ -152,19 +152,6 @@ export class UserService {
     return "noMatching";
   }
 
-
-  // checkIfFriends(user, friendsIds) {
-  //   console.log(friendsIds);
-  //   let friendsArray: any[] = [];
-  //   for(var i = 0; i<friendsIds; i++) {
-  //     if(friendsIds[i].pushkey === user.pushkey){
-  //       friendsArray.push(friendsIds[i]);
-  //     }
-  //     console.log(friendsArray);
-  //     return friendsArray;
-  //   }
-  // }
-
   getFriendsTableById(userFriendsList){
     let friendsTableList = [];
       for(let i=0; i<userFriendsList.length; i++){
@@ -190,19 +177,23 @@ export class UserService {
     return messagesList;
   }
 
-  getFriendsListById(dataLists, uId){
+  getFriendsListById(dataLists){
     let friendsList = [];
-    for(var i =0; i<dataLists.length; i++) {
-      let data = this.af.database.list('friends/' + dataLists[i])
-      data.subscribe((data1)=>{
-        if(uId === data1[1].$value){
-          friendsList.push(data[0]);
-        }else{ friendsList.push[1]}
-      });
+
+    for(var i =0; i< dataLists.length; i++) {
+      let data = this.af.database.list('friends/' + dataLists[i]);
+      friendsList.push(data);
     };
-    console.log(friendsList);
-  return friendsList;
-}
+    return friendsList;
+  }
+
+  // getFriendsNames(friendId) {
+  //   console.log("running function in console");
+  //   console.log(this.af.database.list('registeredUsers/' + friendId));
+  //   let testing =  this.af.database.list('registeredUsers/' + friendId);
+  //   console.log("testing");
+  //   console.log(testing);
+  // }
 
   getFriendRequestStatus(friendsUid) {
     return this.af.database.list('friends/' + friendsUid);
