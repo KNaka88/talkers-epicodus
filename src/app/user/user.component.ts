@@ -119,6 +119,7 @@ export class UserComponent implements OnInit {
             this.friendRequestStatus = "FriendSent";
           }
         }
+
     });
 
     this.friendsTableFirebase = this.userService.getFriendRequestStatus(this.friendsUid);
@@ -163,8 +164,5 @@ export class UserComponent implements OnInit {
   logoutButtonClicked() {
     this.userService.logout();
   }
-alertFriend() {
-  alert(this.friend);
-}
 
 }

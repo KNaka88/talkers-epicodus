@@ -29,7 +29,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   scrollToBottom() {
@@ -63,13 +63,9 @@ export class MessageComponent implements OnInit, AfterViewChecked {
       userName = user.displayName;
     })
 
-    console.log("sending data");
-    console.log(this.newMessage);
-    console.log( this.friend.displayName);
-    console.log(userName);
-    console.log(this.friendsUid);
     this.userService.sendMessage(this.newMessage, this.friend.displayName, userName, this.friendsUid);
     this.newMessage="";
+    this.scrollToBottom();
   }
 
   getMessagesId(friendsUid){
