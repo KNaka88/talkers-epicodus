@@ -2,3 +2,7 @@
    cursor: pointer;
    cursor: hand;
 }
+
+.form-control {
+  border-radius: 15px;
+}
