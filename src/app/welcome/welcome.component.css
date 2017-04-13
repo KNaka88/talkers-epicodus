@@ -1,9 +1,10 @@
 #s {
-  color: white;
+  opacity: 0;
 }
 
 #s:hover {
-  color: red;
+  opacity: 1;
+  color: darkred;
 }
 
 .our-logo {

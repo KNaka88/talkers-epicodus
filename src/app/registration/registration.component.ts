@@ -47,9 +47,10 @@ export class RegistrationComponent implements OnInit {
   }
   iconPreview(e) {
     console.log(e);
+    this.icon = e;
   }
-  setPreview(e){
-    return 'assets/img/icon' + e + '.png';
+  setPreview(){
+    return 'assets/img/icon' + this.icon + '.png';
   }
 
 }

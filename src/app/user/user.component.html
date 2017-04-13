@@ -2,7 +2,8 @@
   <span class="navbar-text">
   Welcome {{(userFbObj | async)?.displayName}}
 </span>
-<button type="button" name="button"class="btn navbar-btn" (click)="logoutButtonClicked()">Logout</button>
+  <button type="button" name="button" class="btn navbar-btn btn-default" (click)="logoutButtonClicked()">Logout</button>
+  <span class="navbar-text title">Talkers</span>
 </nav>
 <div class="row">
   <div class="col-md-8">
@@ -15,7 +16,7 @@
                 <li>{{user.displayName}}</li>
                 <li>{{user.timestamp | date:"MM/dd/yy hh:mm a"}}</li>
                 <div *ngIf="status; else elseBlock">
-                  <form >
+                  <form>
                     <input #newMessage type="text">
                     <button (click)="sendMessage(newMessage.value, user)">Send</button>
                   </form>

@@ -3,6 +3,6 @@
   <input #newEmail type="email" class="form-control"><br>
   <label>Password</label>
   <input type="password" #newPassword class="form-control"><br>
-  <button class="btn" (click)="login(newEmail.value, newPassword.value)">Login</button>
+  <button class="btn btn-default" (click)="login(newEmail.value, newPassword.value)">Login</button>
 </form>
 <img src="../assets/img/btn_google_signin_light_normal_web.png" alt="Login With Google" (click)="loginGoogleButton()" class="clickable" />
