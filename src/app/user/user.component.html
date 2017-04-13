@@ -1,3 +1,4 @@
+<!-- user component -->
 <nav class="navbar navbar-inverse bg-faded">
   <span class="navbar-text">
   Welcome {{(userFbObj | async)?.displayName}}
@@ -14,29 +15,63 @@
               <ul>
                 <li>{{user.displayName}}</li>
                 <li>{{user.timestamp | date:"MM/dd/yy hh:mm a"}}</li>
-                <div *ngIf="status; else elseBlock">
-                  <form >
-                    <input #newMessage type="text">
-                    <button (click)="sendMessage(newMessage.value, user)">Send</button>
-                  </form>
+
+
+
+                <!-- need to work on status (friendsTableFirebase) -->
+                <div *ngIf="friendsTableFirebase">
+                  <div *ngFor="let friendTable of friendsTableFirebase |async">
+                    <li>{{friendTable.$value}}</li>
+                  </div>
                 </div>
-                <ng-template #elseBlock>
-                  <button (click)="addFriend(user.$key)">Send Friend Request</button>
-                </ng-template>
+
+
+
+
+
+                <div *ngIf="uid !== user.$key">
+                  <div *ngIf="status; else elseBlock">
+                    <form>
+                      <input #newMessage type="text">
+                      <button (click)="sendMessage(newMessage.value, user)">Send</button>
+                    </form>
+                  </div>
+                  <ng-template #elseBlock>
+                    <div *ngIf="!friendRequestStatus">
+                      <button (click)="addFriend(user.$key)">Send Friend Request</button>
+                    </div>
+                    <div *ngIf="friendRequestStatus === 'YouSent'">
+                      <h6>Friend Request Sent</h6>
+                    </div>
+                    <div *ngIf="friendRequestStatus === 'FriendSent'">
+                      <h6>Waiting Friend Request Confirmation</h6>
+                      <button (click)="confirmFriendRequest(user)">Confirm</button>
+                    </div>
+                  </ng-template>
+                </div>
               </ul>
             </sebm-google-map-info-window>
+
+
           </sebm-google-map-marker>
         </div>
       </sebm-google-map>
     </div>
-
   </div>
+<!-- end of user component -->
+
+
+
+  <!-- friends list -->
   <div class="col-m-4">
+    <h6>Friends List</h6>
+
+
     <app-friends-list></app-friends-list>
 
     <div *ngIf="allFriends">
       <div *ngFor="let friendFire of allFriends">
-        <li>{{friendFire[3].$value}}</li>
+        <li>{{friendFire.$value}}</li>
       </div>
     </div>
 
@@ -45,7 +80,12 @@
     </div>
   </div>
 </div>
+<!-- end of friends list -->
+
+
+
+<!-- app messages component -->
 <div *ngIf="friend">
-  <h3>Showing...</h3>
   <app-message [friend]="friend" [friendsUid]="friendsUid" [userFbObj]="userFbObj"></app-message>
 </div>
+<!-- end of app messages component -->

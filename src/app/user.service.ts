@@ -176,15 +176,15 @@ export class UserService {
     return messagesList;
   }
 
-  getFriendRequestStatus(userUid, friend) {
-
-
-    // console.log("userUid" + userUid);
-    // console.log("friendsUid" + friendsUid);
-    // this.af.database.list('friends/' + friendsUid).subscribe((result) => {
-    //   console.log(result);
-    // });
+  getFriendRequestStatus(friendsUid) {
+    return this.af.database.list('friends/' + friendsUid);
   }
 
 
+  confirmFriendRequest(friendsUid){
+    console.log(friendsUid);
+    this.af.database.object('friends/' + friendsUid).update({
+      status: "true"
+    });
+  }
 }

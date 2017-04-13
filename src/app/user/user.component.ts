@@ -31,7 +31,8 @@ export class UserComponent implements OnInit {
   public allFriends: any[];
   public friend:FirebaseObjectObservable<any>;
   public status: boolean = false;
-
+  public friendRequestStatus: any;
+  public friendsTableFirebase: FirebaseListObservable<any>;
 
   constructor(
     private userService: UserService,
@@ -102,8 +103,28 @@ export class UserComponent implements OnInit {
   sendFriendData(user){
     this.friend = user;
     this.getMutualFriendId(user);
+    this.userService.getFriendRequestStatus(this.friendsUid).subscribe((result)=>{
+        let user1Id = result[0].$value;
+        this.status = result[2].$value;
 
-    this.userService.getFriendRequestStatus(this.uid, this.friendsUid);
+        if(this.uid === user1Id){
+          //this person sent friend request
+          this.friendRequestStatus = "YouSent";
+        }else{
+          //friend sent friend request
+          this.friendRequestStatus = "FriendSent";
+        }
+    });
+
+    this.friendsTableFirebase = this.userService.getFriendRequestStatus(this.friendsUid);
+    console.log(this.friendsTableFirebase);
+
+  }
+
+  confirmFriendRequest(user){
+    this.getMutualFriendId(user);
+    this.userService.confirmFriendRequest(this.friendsUid);
+
   }
 
 
