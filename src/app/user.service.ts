@@ -168,11 +168,13 @@ export class UserService {
 
   getMessagesById(dataLists){
     let messagesList = [];
-
+    console.log(dataLists.length);
       for(var i =0; i<dataLists.length; i++) {
+        console.log("loop");
         let data = this.af.database.list('messages/' + dataLists[i].$value)
         messagesList.push(data);
       };
+      console.log('loopend');
     return messagesList;
   }
 

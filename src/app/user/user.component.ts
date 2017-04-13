@@ -6,12 +6,13 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers: [UserService]
+  providers: [UserService, MessageComponent]
 })
 export class UserComponent implements OnInit {
   // preset location and icon
@@ -37,6 +38,7 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private messageComponent: MessageComponent
   ) { }
 
   ngOnInit() {
@@ -96,10 +98,6 @@ export class UserComponent implements OnInit {
     });
   }
 
-  // hideInfoWindow(){
-  //   this.infoWindow = false;
-  // }
-
   sendFriendData(user){
     this.friend = user;
     this.friendRequestStatus = "";
@@ -125,6 +123,16 @@ export class UserComponent implements OnInit {
 
     this.friendsTableFirebase = this.userService.getFriendRequestStatus(this.friendsUid);
 
+    var p1 = new Promise((resolve)=> {
+      this.getMutualFriendId(user);
+      resolve(this.friendsUid);
+    });
+
+    p1.then( (friendsUid)=> {
+
+      this.messageComponent.getMessagesId(friendsUid);
+    });
+
   }
 
   confirmFriendRequest(user){
@@ -137,18 +145,20 @@ export class UserComponent implements OnInit {
   getMutualFriendId(friend){
     // 1. get FriendsUid that matches
     this.friendsUid =  "";
+    if(this.uid !== friend.$key){
+      //get user friends list
+      this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
+        this.userFriendsList = userFriendsListData;
+      });
 
-    //get user friends list
-    this.userService.getUserFriendsUid(this.uid).subscribe( (userFriendsListData) => {
-      this.userFriendsList = userFriendsListData;
-    });
-
-    // get friend's friend list
-    this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
-      this.friendFriendsList = friendFriendsListData;
-    });
-    this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
+      // get friend's friend list
+      this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
+        this.friendFriendsList = friendFriendsListData;
+      });
+      this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
+    }
   }
+
 
   logoutButtonClicked() {
     this.userService.logout();

@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
+import { Component, Input, AfterViewChecked, ElementRef, ViewChild,  OnInit} from '@angular/core';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
@@ -13,17 +13,20 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   @Input() friend: any;
   @Input() friendsUid: string;
   @Input() userFbObj: FirebaseObjectObservable<any>;
+  @Input() friendsTableFirebase: FirebaseListObservable<any>;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   public newMessage: string;
   public messagesId:FirebaseListObservable<any>;
   public messages:any;
-  // public messages:FirebaseListObservable<any[]>;
-  public results: any = [];
-
+  public results: any[];
   ngOnInit(){
-    this.getMessagesId();
   }
+
+  ngOnChanges() {
+      this.getMessagesId(this.friendsUid);
+  }
+
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -55,33 +58,41 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage(){
-
     let userName = "";
     this.userFbObj.subscribe((user) => {
       userName = user.displayName;
     })
 
+    console.log("sending data");
+    console.log(this.newMessage);
+    console.log( this.friend.displayName);
+    console.log(userName);
+    console.log(this.friendsUid);
     this.userService.sendMessage(this.newMessage, this.friend.displayName, userName, this.friendsUid);
     this.newMessage="";
   }
 
-  getMessagesId(){
-    //neeed to grab messages!! not friend firebase data!!!''
-    this.messagesId = this.userService.getMessagesId(this.friendsUid);
-    this.getMessagesById(this.messagesId);
+  getMessagesId(friendsUid){
+    this.friendsUid = friendsUid;
+    this.userService.getMessagesId(this.friendsUid).subscribe( (messagesId)=>{
+        this.getMessagesById(messagesId);
+    });
   }
 
   getMessagesById(messagesId){
-
-    messagesId.subscribe( (dataLists) => {
-      this.messages = this.userService.getMessagesById(dataLists)
-      this.messages.forEach(elem=>{
-        elem.subscribe(res=>{
-          let data = res;
-          this.results.push(data);
-        })
-      })
-    });
+      this.messages = this.userService.getMessagesById(messagesId);
+      this.results = [];
+      if(this.messages.length !== 0){
+        this.messages.forEach( (elem)=>{
+          elem.subscribe( (res)=>{
+            let data = res;
+            this.results.push(data);
+          });
+        });
+      } else {
+        //if there are no messages
+        console.log("else");
+      }
   }
 
   getMessages(){
