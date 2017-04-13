@@ -11,7 +11,7 @@
     <div class="google-maps">
       <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
         <div *ngFor="let user of users | async">
-          <sebm-google-map-marker (markerClick)="sendFriendData(user)" class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
+          <sebm-google-map-marker (markerClick)="sendFriendData(user, $event)" class='icon' [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon" (mouseOver)="showInfoWindow()">
             <sebm-google-map-info-window [disableAutoPan]="true">
               <ul>
                 <li>{{user.displayName}}</li>
@@ -45,13 +45,6 @@
                         </ng-template>
                       </div>
                     </div>
-<!-- =======
-                <div *ngIf="status; else elseBlock">
-                  <form>
-                    <input #newMessage type="text">
-                    <button (click)="sendMessage(newMessage.value, user)">Send</button>
-                  </form>
->>>>>>> origin/test -->
                 </div>
 
               </ul>
@@ -79,15 +72,18 @@
         <li>{{friendFire.$value}}</li>
       </div>
     </div>
+<<<<<<< HEAD
 
     <!-- <div *ngIf="friend">
       <app-message [friend]="friend"></app-message>
     </div> -->
+=======
+>>>>>>> origin/master
 <!-- end of friends list -->
 
 <!-- app messages component -->
 <div *ngIf="friend">
-  <app-message [friend]="friend" [friendsUid]="friendsUid" [userFbObj]="userFbObj"></app-message>
+  <app-message [friend]="friend" [friendsUid]="friendsUid" [friendsTableFirebase]="friendsTableFirebase" [userFbObj]="userFbObj"></app-message>
 </div>
 <!-- end of app messages component -->
 </div>

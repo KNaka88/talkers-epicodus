@@ -1,34 +1,25 @@
-<li (click)="getMessages()">{{friend.displayName}}</li>
-<div class="containerTODELETE">
-  <div class="rowTODELETE">
-    <div class="col-md-8TODELETE">
-      <div class="message-box" id="messages">
-        <div class="bs-example" id="messages" #scrollMe>
-          <div *ngFor="let messageArray of results">
-            <div class="bubble">
-              <li>{{ messageArray[0].$key}}: {{messageArray[0].$value}}</li>
-              <li>{{ messageArray[3].$key}}: {{messageArray[3].$value}}</li>
-              <li>{{ messageArray[1].$key}}: {{messageArray[1].$value}}</li>
-              <div class="message-bottom-tag">
-                {{ messageArray[3].$key }}: {{messageArray[3].$value}} {{messageArray[2].$value | date: "M/dd hh:mm"}}
-              </div>
-              <!-- <div *ngFor="let message of messageArray"> -->
 
-              <!-- <p>{{message.message}}</p>
-                <div class="author">
-                  {{message.from}} | {{message.timestamp | date: "MM/dd/yy hh:mm a"}}
-                </div> -->
-              <!-- <li>Hello</li>
-                <li>{{message[0].$value}}</li>-->
-              <!-- </div> -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="bs-example" id="messages" #scrollMe>
+        <div *ngFor="let messageArray of results">
+            <div class="bubble">
+                <p>{{ messageArray[1].$value }}</p>
+              <div class="author">
+                {{messageArray[0].$value}} | {{messageArray[2].$value | date: "MM/dd/yy hh:mm a"}}
+              </div>
             </div>
-          </div>
         </div>
       </div>
-      <figure class="highlight">
-        <input type="textarea" class="message-text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
-        <a class="send-message" (click)="sendMessage()">SEND</a>
-      </figure>
+      <div *ngFor="let friendTable of friendsTableFirebase |async">
+        <div *ngIf="friendTable.$key ==='status'">
+          <figure *ngIf="friendTable.$value === 'true'; else elseBlock" class="highlight">
+            <input type="textarea" class="message-text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+            <a class="send-message" (click)="sendMessage()">SEND</a>
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
 </div>
