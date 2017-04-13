@@ -27,7 +27,6 @@ login(email, password) {
 
 loginGoogleButton() {
   return this.userService.loginGoogle().then((data) => {
-    console.log(data);
     this.userService.updateGoogleLoginInfo(data.auth.displayName, data.auth.email, data.uid, data.auth.photoURL);
     this.router.navigate(['user/' + data.uid]);
   });

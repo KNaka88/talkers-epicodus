@@ -23,8 +23,6 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(){
     this.getMessagesId();
-    console.log("start");
-
   }
 
   ngAfterViewChecked() {
@@ -74,11 +72,6 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   }
 
   getMessagesById(messagesId){
-    // messagesId.subscribe( (dataLists) => {
-    //   this.messages = this.userService.getMessagesById(dataLists);
-    //   console.log(this.messages);
-    //   console.log("messages ran")
-    // });
 
     messagesId.subscribe( (dataLists) => {
       this.messages = this.userService.getMessagesById(dataLists)
@@ -86,21 +79,9 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         elem.subscribe(res=>{
           let data = res;
           this.results.push(data);
-          console.log(res);
         })
       })
-      // console.log(this.messages);
-      console.log("messages ran")
     });
-
-    // console.log(this.messages);
-
-    // this.userService.getMessagesById(messagesId).subscribe( (data)=>{
-    //   console.log(data);
-    //   this.messages = data;
-    // });
-
-    // this.messages = this.userService.getMessagesById(messagesId);
   }
 
   getMessages(){

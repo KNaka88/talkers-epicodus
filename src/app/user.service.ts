@@ -125,9 +125,6 @@ export class UserService {
     this.messages.push(message).then( (data) =>{
       //get $key of the message
       let messageKey = data.path.o[1];
-      console.log("Check friendsuid and messagekey");
-      console.log(friendsUid);
-      console.log(messageKey);
       //push to the friends table data as a list
       this.af.database.list('friends/' + friendsUid + '/messages').push(messageKey);
     });
@@ -146,15 +143,10 @@ export class UserService {
   checkIfMutualFriends(userLists, friendsList){
     for(let i = 0; i < userLists.length; i++){
       for(let j = 0; j <friendsList.length; j++ ){
-        if(userLists[i].key === friendsList[j].key){
-          return userLists[i].key;
+        if(userLists[i].Pushkey === friendsList[j].Pushkey){
+          return userLists[i].Pushkey;
         }
       }
-      // console.log("Check:" + userLists[i].key);
-      // if(friendsList.includes(userLists[i].key)){
-      //   console.log("Matched:" + userLists[i]);
-      //   return this.af.database.list('friends/' + userLists[i]);
-      // }
     }
     return "noMatching";
   }
@@ -175,25 +167,24 @@ export class UserService {
   }
 
   getMessagesById(dataLists){
-    console.log("getMessagesById...");
     let messagesList = [];
 
       for(var i =0; i<dataLists.length; i++) {
         let data = this.af.database.list('messages/' + dataLists[i].$value)
         messagesList.push(data);
       };
-      console.log(dataLists);
     return messagesList;
   }
 
-  // friendRequestStatus(userUid, friendsUid) {
-  // this.af.database.list('friends/' + friendsUid).subscribe((result) => {
-  //   if(userId === result.friend1id){
-  //     let status = "pending";
-  //   }else if (userId === result.friend2id) {
-  //
-  //   }
-  // })
+  getFriendRequestStatus(userUid, friend) {
+
+
+    // console.log("userUid" + userUid);
+    // console.log("friendsUid" + friendsUid);
+    // this.af.database.list('friends/' + friendsUid).subscribe((result) => {
+    //   console.log(result);
+    // });
+  }
 
 
 }

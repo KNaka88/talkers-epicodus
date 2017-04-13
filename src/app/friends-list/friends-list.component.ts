@@ -18,9 +18,6 @@ export class FriendsListComponent implements OnInit {
 
   ngOnInit() {
     this.friends = this.userService.getFriends(this.uid);
-    console.log('this.friends')
-    console.log(this.friends)
-    console.log('this.friends')
   }
 
 }

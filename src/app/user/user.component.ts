@@ -51,7 +51,6 @@ export class UserComponent implements OnInit {
     this.userFbObj = this.userService.getUserById(this.uid);
     this.users = this.userService.getAllUsers();
     this.usersFriends = this.userService.getFriends(this.uid);
-    console.log(this.userFbObj);
   }
 
   setLatLng(lat: number, lng: number) {
@@ -62,7 +61,7 @@ export class UserComponent implements OnInit {
 
   showInfoWindow(){
     this.infoWindow = true;
-    console.log(this.infoWindow);
+
   }
 
 
@@ -75,7 +74,6 @@ export class UserComponent implements OnInit {
   sendMessage(newMessage, friend){
 
     this.getMutualFriendId(friend);
-
 
     // 2. get friendName and userName
     let friendName = friend.displayName;
@@ -104,6 +102,8 @@ export class UserComponent implements OnInit {
   sendFriendData(user){
     this.friend = user;
     this.getMutualFriendId(user);
+
+    this.userService.getFriendRequestStatus(this.uid, this.friendsUid);
   }
 
 
@@ -120,8 +120,6 @@ export class UserComponent implements OnInit {
     this.userService.getFriendFriendsUid(friend.$key).subscribe( (friendFriendsListData) => {
       this.friendFriendsList = friendFriendsListData;
     });
-
-
     this.friendsUid = this.userService.checkIfMutualFriends(this.userFriendsList, this.friendFriendsList);
   }
 
