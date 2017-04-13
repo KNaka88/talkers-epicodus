@@ -100,13 +100,16 @@ export class UserService {
   sendFriendRequest(userUid, friendUid) {
     let pushObj = {
       friend1Id: userUid,
-      friend2Id: friendUid
+      friend2Id: friendUid,
+      status: "false"
     };
     let fbFriends = this.af.database.list('friends');
     fbFriends.push(pushObj).then((pushObj) => {
       // console.log("this is the push id key: " +pushObj.key);
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
       userFriendsList.push({Pushkey: pushObj.key});
+      let friendFriendsList = this.af.database.list('registeredUsers/' + friendUid + "/friends");
+      friendFriendsList.push({Pushkey: pushObj.key});
     });
   }
 
@@ -178,16 +181,19 @@ export class UserService {
       for(var i =0; i<dataLists.length; i++) {
         let data = this.af.database.list('messages/' + dataLists[i].$value)
         messagesList.push(data);
-
-      // for(var i =0; i<messages.length; i++) {
-      //   this.af.database.list('messages/' + messages[i].$value).subscribe( (message)=> {
-      //     let messageData = message;
-      //     messagesList.push(messageData);
-      //   });
-      // }
-      // console.log(messagesList);
       };
       console.log(dataLists);
     return messagesList;
   }
+
+  // friendRequestStatus(userUid, friendsUid) {
+  // this.af.database.list('friends/' + friendsUid).subscribe((result) => {
+  //   if(userId === result.friend1id){
+  //     let status = "pending";
+  //   }else if (userId === result.friend2id) {
+  //
+  //   }
+  // })
+
+
 }

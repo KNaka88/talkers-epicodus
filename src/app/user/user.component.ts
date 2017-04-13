@@ -30,6 +30,7 @@ export class UserComponent implements OnInit {
   public friendFriendsList: any;
   public allFriends: any[];
   public friend:FirebaseObjectObservable<any>;
+  public status: boolean = false;
 
 
   constructor(
@@ -67,8 +68,6 @@ export class UserComponent implements OnInit {
 
   addFriend(friendUid) {
     this.userService.sendFriendRequest(this.uid, friendUid);
-    console.log(friendUid);
-
     this.getAllFriendsById();
 
   }
