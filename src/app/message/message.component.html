@@ -6,7 +6,7 @@
         <div *ngFor="let messageArray of results">
             <div class="bubble">
                 <p>{{ messageArray[1].$value }}</p>
-              <div class="author">
+              <div class="message-bottom-tag">
                 {{messageArray[0].$value}} | {{messageArray[2].$value | date: "MM/dd/yy hh:mm a"}}
               </div>
             </div>
