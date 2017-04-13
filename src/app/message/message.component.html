@@ -6,11 +6,11 @@
         <div class="bs-example" id="messages" #scrollMe>
           <div *ngFor="let messageArray of results">
             <div class="bubble">
-              <li>{{ messageArray[0].$key}}: {{messageArray[0].$value}}</li>
-              <li>{{ messageArray[3].$key}}: {{messageArray[3].$value}}</li>
-              <li>{{ messageArray[1].$key}}: {{messageArray[1].$value}}</li>
+              <!-- <li>{{ messageArray[0].$key}}: {{messageArray[0].$value}}</li>
+              <li>{{ messageArray[3].$key}}: {{messageArray[3].$value}}</li> -->
+              {{messageArray[1].$value}}
               <div class="message-bottom-tag">
-                {{ messageArray[3].$key }}: {{messageArray[3].$value}} {{messageArray[2].$value | date: "M/dd hh:mm"}}
+                {{ messageArray[0].$key }}: {{messageArray[0].$value}} {{messageArray[2].$value | date: "M/dd hh:mm"}}
               </div>
               <!-- <div *ngFor="let message of messageArray"> -->
 
@@ -22,6 +22,7 @@
                 <li>{{message[0].$value}}</li>-->
               <!-- </div> -->
             </div>
+            <br>
           </div>
         </div>
       </div>
