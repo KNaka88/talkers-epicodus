@@ -80,19 +80,6 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   }
 
   getMessagesById(messagesId){
-<<<<<<< HEAD
-
-    messagesId.subscribe( (dataLists) => {
-      this.messages = this.userService.getMessagesById(dataLists)
-      this.messages.forEach(elem=>{
-        elem.subscribe(res=>{
-          let data = res;
-          console.log(data);
-          this.results.push(data);
-        })
-      })
-    });
-=======
       this.messages = this.userService.getMessagesById(messagesId);
       this.results = [];
       if(this.messages.length !== 0){
@@ -106,7 +93,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         //if there are no messages
         console.log("else");
       }
->>>>>>> origin/master
+
   }
 
   getMessages(){
