@@ -78,6 +78,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
       this.messages.forEach(elem=>{
         elem.subscribe(res=>{
           let data = res;
+          console.log(data);
           this.results.push(data);
         })
       })

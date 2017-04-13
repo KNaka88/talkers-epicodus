@@ -1,0 +1,20 @@
+.bubble {
+  background-color: #F2F2F2;
+  border-radius: 5px;
+  box-shadow: 0 0 6px #222 ;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  padding-bottom: 2px
+}
+.message-box {
+  height: 50vh;
+  overflow: scroll;
+  width: inherit;
+  background: grey ;
+  color: white;
+}
+
+.message-bottom-tag {
+  font-size: 11px;
+}

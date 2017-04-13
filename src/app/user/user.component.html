@@ -6,7 +6,7 @@
   <button type="button" name="button" class="btn navbar-btn btn-default" (click)="logoutButtonClicked()">Logout</button>
   <span class="navbar-text title">Talkers</span>
 </nav>
-<div class="row">
+<div class="row" (click)="alertFriend()">
   <div class="col-md-8">
     <div class="google-maps">
       <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]='15'>
@@ -68,7 +68,7 @@
 
 
   <!-- friends list -->
-  <div class="col-m-4">
+  <div class="col-md-4">
     <h6>Friends List</h6>
 
 
@@ -80,11 +80,9 @@
       </div>
     </div>
 
-    <div *ngIf="friend">
+    <!-- <div *ngIf="friend">
       <app-message [friend]="friend"></app-message>
-    </div>
-  </div>
-</div>
+    </div> -->
 <!-- end of friends list -->
 
 <!-- app messages component -->
@@ -92,3 +90,5 @@
   <app-message [friend]="friend" [friendsUid]="friendsUid" [userFbObj]="userFbObj"></app-message>
 </div>
 <!-- end of app messages component -->
+</div>
+</div>

@@ -153,6 +153,8 @@ export class UserComponent implements OnInit {
   logoutButtonClicked() {
     this.userService.logout();
   }
-
+alertFriend() {
+  alert(this.friend);
+}
 
 }
