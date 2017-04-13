@@ -13,6 +13,7 @@ export class UserService {
   public friendsListOfFriend: any;
   public fbListFriends: FirebaseListObservable<any[]>;
   public pendingFriends: any[];
+  public friendsId: FirebaseListObservable<any>;
 
   constructor(public af: AngularFire) {
     this.users = af.database.list('registeredUsers');
@@ -92,9 +93,9 @@ export class UserService {
   }
 
   getFriends(uid) {
-    this.fbListFriends = this.af.database.list('registeredUsers/' + uid + "/friends");
-    console.log(this.fbListFriends);
-    return this.fbListFriends;
+  this.fbListFriends = this.af.database.list('registeredUsers/' + uid + "/friends");
+  console.log(this.fbListFriends);
+  return this.fbListFriends;
   }
 
   sendFriendRequest(userUid, friendUid) {
@@ -151,6 +152,19 @@ export class UserService {
     return "noMatching";
   }
 
+
+  // checkIfFriends(user, friendsIds) {
+  //   console.log(friendsIds);
+  //   let friendsArray: any[] = [];
+  //   for(var i = 0; i<friendsIds; i++) {
+  //     if(friendsIds[i].pushkey === user.pushkey){
+  //       friendsArray.push(friendsIds[i]);
+  //     }
+  //     console.log(friendsArray);
+  //     return friendsArray;
+  //   }
+  // }
+
   getFriendsTableById(userFriendsList){
     let friendsTableList = [];
       for(let i=0; i<userFriendsList.length; i++){
@@ -176,13 +190,26 @@ export class UserService {
     return messagesList;
   }
 
+  getFriendsListById(dataLists, uId){
+    let friendsList = [];
+    for(var i =0; i<dataLists.length; i++) {
+      let data = this.af.database.list('friends/' + dataLists[i])
+      data.subscribe((data1)=>{
+        if(uId === data1[1].$value){
+          friendsList.push(data[0]);
+        }else{ friendsList.push[1]}
+      });
+    };
+    console.log(friendsList);
+  return friendsList;
+}
+
   getFriendRequestStatus(friendsUid) {
     return this.af.database.list('friends/' + friendsUid);
   }
 
 
   confirmFriendRequest(friendsUid){
-    console.log(friendsUid);
     this.af.database.object('friends/' + friendsUid).update({
       status: "true"
     });

@@ -10,14 +10,38 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
   providers:[UserService]
 })
 export class FriendsListComponent implements OnInit {
-  @Input()friendsList;
+  // @Input()friendsList;
   @Input()uid;
 
-  constructor(private userService: UserService) { }
-  friends:FirebaseListObservable<any[]>;
 
-  ngOnInit() {
-    this.friends = this.userService.getFriends(this.uid);
-  }
+  allUsers:FirebaseListObservable<any[]>;
+  friends:any[];
+  friendsId:FirebaseListObservable<any>;
+  results: any[];
 
+
+    ngOnInit(){
+      this.getFriendsId();
+    }
+
+    constructor(private userService: UserService) { }
+
+    getFriendsId() {
+    this.friendsId = this.userService.getUserFriendsUid(this.uid);
+      this.getFriendsListById(this.friendsId);
+    }
+
+    getFriendsListById(friendsId) {
+      friendsId.subscribe((data)=>{
+        let pushkey:any = [];
+        for (let i = 0; i < data.length; i++) {
+          pushkey.push(data[i].Pushkey);
+        }
+         this.userService.getFriendsListById(pushkey, this.uid);
+      });
+    }
+
+    getFriendsList() {
+      this.getFriendsListById(this.friendsId);
+    }
 }

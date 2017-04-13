@@ -16,6 +16,7 @@ import { UserService } from './user.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { FriendsListComponent } from './friends-list/friends-list.component';
 import { MessageComponent } from './message/message.component';
+import { FriendsPipe } from './friends.pipe';
 
 
 export const firebaseConfig = {
@@ -34,7 +35,8 @@ export const firebaseConfig = {
     LoginComponent,
     RegistrationComponent,
     FriendsListComponent,
-    MessageComponent
+    MessageComponent,
+    FriendsPipe
   ],
   imports: [
     BrowserModule,

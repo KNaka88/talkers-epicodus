@@ -1,12 +1,10 @@
 <p>
   friends-list works!
 </p>
-<!--
-<div *ngFor="let friend of friends">
-    <li>{{friend.name}}</li>
-    <div *ngIf!="friend">
-      {{friend.status}}
-      <button (click)="acceptFriendRequest(friendId,uid)">Accept</button>
-      <button (click)="declineFriendRequest(friendId,uid)">Decline</button>
-    </div>
-</div> -->
+<p>
+showing...
+</p>
+<div *ngFor="let user of allUsers | async ">
+    <li>{{user.friends}}</li>
+</div>
+<button (click)="getFriendsList()">friends</button>
