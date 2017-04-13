@@ -1,28 +1,88 @@
 # Talkers
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+#### Javascript Group Project for Epicodus by Sarah Leahy, Jake Campa, Koji Nakagawa
 
-## Development server
+## Description
+* This website is the group project for Epicodus "Javascript" class.
+* This website offers messaging service based on geolocation
+* [Sample Web Page](https://stalking-caf97.firebaseapp.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Prerequisites
+You will need the following things properly installed on your computer.
 
-## Code scaffolding
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) (with NPM)
+* [Bower](https://bower.io/)
+* [Angular CLI](https://cli.angular.io/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
-## Build
+## Installation
+* `git clone this repository`
+* `cd club-manager`
+* `npm install`
+* `bower install`
+* `ng s` to start a dev server. Navigate to `http://localhost:4200/`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Technologies Used
+  * HTML
+  * CSS
+  * Bootstrap
+  * Javascript
+  * Typescript
+  * Angular
+  * Node.js
+  * npm
+  * bower
+  * Firebase
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+##### This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0.
 
-## Running end-to-end tests
+## Planning
+MVP
+  * As a user, I can register and signin the page
+  * As a user, I am navigated to my own account page (dynamic routing)
+  * As a user, I can check where I am located at google map
+  * As a user, I can see others' location
+  * As a user, if I clicked the pin on map, I can check others name, last updated time
+  * As a user, I can log out from the page
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Additional
+  * As a user, I can click others pin and send messages
+  * As a user, I can recieve message from others
+  * As a user, I can see all messages I sent
+  * As a user, I can see all messages I received
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+More Additional
+  * As a user, I can edit or delete message what I sent
+  * As a user, I can see only messages I sent to specific person
+  * As a user, I can see only messages I received from specific person
+
+
+Advanced
+  * As a user, I can send friend request
+  * As a user, I can confirm or decline the friend request  
+  * User can send message only they become as friends
+
+
+## License
+  _Copyright (c) 2017 **Sarah Leahy, Jake Campa, Koji Nakagawa**_
+
+  _Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:_
+
+  _The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software._
+
+  _THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE._

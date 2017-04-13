@@ -1,9 +1,10 @@
 export var masterFirebaseConfig = {
-  apiKey: 'AIzaSyD7upI4ljC715KPKqW_9L007By2N2ibQJc',
-  authDomain: 'talkers-455da.firebaseapp.com',
-  databaseURL: 'https://talkers-455da.firebaseio.com',
-  storageBucket: 'talkers-455da.appspot.com',
-  messagingSenderId: '1092636394990'
+  apiKey: "AIzaSyDlEnopSXNBm7uYF__pDgGzY1V0gu1KCq8",
+  authDomain: "club-member.firebaseapp.com",
+  databaseURL: "https://club-member.firebaseio.com",
+  projectId: "club-member",
+  storageBucket: "club-member.appspot.com",
+  messagingSenderId: "688563467426"
 };
 
 export var mapKey = 'AIzaSyDsD_dPj9HPURZMFtFjg0iiQdDuzfAgfcU';
