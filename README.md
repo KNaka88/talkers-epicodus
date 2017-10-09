@@ -7,6 +7,9 @@
 * This website offers messaging service based on geolocation
 * [Sample Web Page](https://stalking-caf97.firebaseapp.com/)
 
+![sample image](/src/assets/img/image1.png)
+![sample image](/src/assets/img/image2.png)
+
 ## Prerequisites
 You will need the following things properly installed on your computer.
 
@@ -15,14 +18,22 @@ You will need the following things properly installed on your computer.
 * [Bower](https://bower.io/)
 * [Angular CLI](https://cli.angular.io/)
 
+## API Key
+You need to get google map api and firebase account
+* [Google Map](https://developers.google.com/maps/)
+* [Firebase](https://firebase.google.com/docs/web/setup)
+
 
 ## Installation
+* Change the file name of `api_keys_template.ts` to `api_keys.ts` (src/app), and add your Trimet and Google map API keys
+
+![instruction](/src/assets/img/api-instruction.png)
+
 * `git clone this repository`
-* `cd club-manager`
+* `cd talkers-epicodus`
 * `npm install`
 * `bower install`
 * `ng s` to start a dev server. Navigate to `http://localhost:4200/`.
-
 
 ## Technologies Used
   * HTML

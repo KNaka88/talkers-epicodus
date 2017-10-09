@@ -1,10 +1,10 @@
 export var masterFirebaseConfig = {
-  apiKey: "AIzaSyDlEnopSXNBm7uYF__pDgGzY1V0gu1KCq8",
-  authDomain: "club-member.firebaseapp.com",
-  databaseURL: "https://club-member.firebaseio.com",
-  projectId: "club-member",
-  storageBucket: "club-member.appspot.com",
-  messagingSenderId: "688563467426"
-};
+  apiKey: "ADD HERE",
+  authDomain: "ADD HERE",
+  databaseURL: "ADD HERE",
+  projectId: "ADD HERE",
+  storageBucket: "ADD HERE",
+  messagingSenderId: "ADD HERE"
+  };
 
-export var mapKey = 'AIzaSyDsD_dPj9HPURZMFtFjg0iiQdDuzfAgfcU';
+export var mapKey = "GOOGLE MAP API";
